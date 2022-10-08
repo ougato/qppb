@@ -1,0 +1,106 @@
+syntax = "proto3";
+option go_package="./;app";
+
+/***********************************
+* 描述:统一错误码
+***********************************/
+enum ErrorCode{
+  NO = 0;
+  UnKnow = 1;           //未知错误
+  InternalServer = 2;   //内部服务错误
+  RequestData = 3;      //请求数据错误
+  CmdInvalid = 4;       //命令无效
+}
+
+/***********************************
+* 描述:命令码
+***********************************/
+enum CmdCode{
+  CmdUnKnow = 0;     //未知错误
+  CmdHeartBeat = 1;  //心跳。默认30s 发送一次
+
+  CmdHallModule = 2000;               //大厅模块指令 2000-2999
+  CmdHallLoginAuth = 2001;            //大厅登录认证
+  CmdHallLogout = 2002;               //大厅登录退出
+  CmdHallBindPhone = 2003;            //绑定手机号
+  CmdHallRealNameAuth = 2004;         //实名认证
+  CmdHallPlayerLocation = 2005;       //玩家位置
+  CmdHallPlayerInfoGet = 2006;        //玩家信息获取
+  CmdHallCustomerServiceInfo = 2007;  //客服信息
+  CmdHallFeedback = 2008;             //反馈
+  CmdHallNotice = 2009;               //公告
+  CmdHallMessage = 20010;              //大厅消息
+  CmdHallBattleRecordList = 2011;         //大厅战绩列表
+  CmdHallBattleRecordDetail = 2012;         //大厅战绩详情
+  CmdHallBattleRecordDetailPlayback = 2013;   //大厅战绩详情回放
+
+  CmdCircleJoinApply = 2101;                //圈子加入申请
+  CmdCircleEnter = 2102;                //圈子进入
+  CmdCircleGoBackHall = 2103;           //圈子退回大厅
+  CmdCircleQuit = 2104;                //圈子退出，与JoinApply对应
+  CmdCircleInfoSet = 2106;                //圈子信息设置
+  CmdCircleInfoGet = 2107;                //圈子信息获取
+  CmdCircleInfoStatisticsGet = 2108;                //圈子信息统计信息获取
+  CmdCircleInfoRankTodayGet = 2109;                //圈子信息竞技排行今天
+  CmdCircleInfoRankYesterdayGet = 2110;                //圈子信息竞技排行昨天
+  CmdCircleInfoRankWeekGet = 2111;                //圈子信息竞技排行周榜
+
+  CmdCircleScoreCircleRecords = 2201;       //圈子胜点-乐圈清单记录
+  CmdCircleScoreGameRecords = 2202;         //圈子胜点-游戏清单记录
+  CmdCircleSettingAdminList = 2203;        //圈子设置管理员列表 最多五个
+  CmdCircleSettingAdminAdd = 2204;         //圈子设置管理员添加
+  CmdCircleSettingAdminDelete = 2205;      //圈子设置管理员删除
+  CmdCircleSettingAdminModify = 2206;      //圈子设置权力修改  超级管理员最多三个
+  CmdCircleSettingGameRecords = 2207;       //圈子游戏记录
+
+  CmdCircleNumberList = 2301;    //圈子成员列表
+  CmdCircleNumberListSearch = 2302;    //圈子成员列表搜索
+  CmdCircleNumberGamePermissionSet = 2303;         //圈子成员游戏权限获取
+  CmdCircleNumberScoreChange = 2304;              //圈子成员积分修改
+  CmdCircleNumberStatus = 2305;    //圈子成员状态
+  CmdCircleNumberStatusSearch = 2306;    //圈子成员状态搜索
+  CmdCircleFriendList = 2310;    //圈子好友管理朋友列表
+  CmdCircleFriendBind = 2312;   //圈子好友管理绑定
+  CmdCircleFriendUnBind = 2313;   //圈子好友管理解绑
+  CmdCircleFriendFriendList = 2314;   //圈子好友管理中好友的好友列表
+  CmdCircleFriendPermissionSet = 2316;   //圈子好友管理中设置特权
+  CmdCircleFriendAdd = 2317;   //圈子好友管理添加好友
+  CmdCircleFriendInvite = 2318;   //圈子好友管理中邀请好友
+  CmdCircleFriendStatisticsDetail = 2319;   //圈子好友管理统计详情
+
+
+  CmdCircleMsgNotify = 2401;   //圈子消息通知
+  CmdCircleMsgList = 2402;   //圈子消息列表
+  CmdCircleMsgReadSign = 2403;   //圈子消息读状态
+  CmdCircleMsgHandlePlayerApply = 2404;   //圈子消息处理玩家申请
+
+  CmdCircleGameListGet = 2501;           //圈子游戏列表获取
+  CmdCircleGameDeskSettingList = 2502;           //圈子游戏开桌设置列表
+  CmdCircleGameDeskSettingAdd = 2503;           //圈子游戏开桌设置添加
+  CmdCircleGameDeskSettingModify = 2504;           //圈子开桌设置修改
+  CmdCircleGameDeskSettingDelete = 2505;           //圈子开桌设置删除
+  CmdCircleGameDeskSettingAutoOpenDesk = 2506;     //修改开桌设置是否自动开桌
+  CmdCircleGameDeskListGet = 2507;           //圈子桌子获取
+  CmdCircleGameDeskCreate = 2508;           //圈子桌子创建
+  CmdCircleGameDeskEnter = 2509;           //圈子桌子进入
+  CmdCircleGameDeskEnterNotice = 2510;      //圈子桌子玩家进入消息通知
+  CmdCircleGameDeskLeave = 2511;           //圈子桌子离开
+  CmdCircleGameDeskLeaveNotice = 2523;     //圈子桌子玩家离开消息通知
+
+
+  CmdZJHModule = 3000;  //炸金花模块指令 3000-3999
+
+  CmdTTZModule = 4000;  //推筒子模块指令 4000-4999
+
+
+}
+
+/***********************************
+* 描述: 统一信息结构
+***********************************/
+message common_message {
+  int64 msg_id = 1;         // 消息ID ，客户端发送，服务器回传
+  ErrorCode err_code = 2;    // 错误代码
+  CmdCode cmd_code = 3;     // 指令代码码
+  bytes message = 4;        // 根据命令码 对应相应消息结构
+}

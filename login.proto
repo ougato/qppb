@@ -1,0 +1,72 @@
+syntax = "proto3";
+option go_package="./;app";
+
+//登录模块采用http post请求 格式"application/x-protobuf"
+
+/***********************************
+* 描述: 获取手机验证码
+* url:/game/sms/get
+***********************************/
+//请求消息
+message game_sms_code_get_req {
+  string phone = 1;   //手机号
+}
+//回复消息
+message game_sms_code_get_resp {
+
+}
+
+/***********************************
+* 描述: 根据手机号登录
+* url:/game/login/phone/sms
+***********************************/
+//请求消息
+message game_login_phone_sms_req {
+  string phone = 1;      //手机号码
+  string sms_code = 2;   //验证码，测试默认123456
+}
+//回复消息
+message game_login_phone_sms_resp {
+  string user_token = 1;   //玩家token
+  bool is_newer = 2;     //新用户
+}
+
+/***********************************
+* 描述: 根据手机号登录
+* url:/game/login/phone/password
+***********************************/
+//请求消息
+message game_login_phone_password_req {
+  string phone = 1;      //手机号码
+  string password = 2;   //密码
+}
+//回复消息
+message game_login_phone_password_resp {
+  string user_token = 1;   //玩家token
+}
+
+/***********************************
+* 描述: 根据微信授权登录
+* url:/game/winxin/auth
+***********************************/
+//请求消息
+message game_winxin_auth_req {
+  string auth_code = 1;  //授权码
+}
+//回复消息
+message game_winxin_auth_resp {
+  string auth_code = 1;  //授权码
+}
+/***********************************
+* 描述: 根据微信token登录
+* url:/game/login/winxin
+***********************************/
+//请求消息
+message game_login_winxin_req {
+  string access_token = 1;  //登录token
+
+}
+//回复消息
+message game_login_winxin_resp {
+  string user_token = 1;   //玩家token
+}

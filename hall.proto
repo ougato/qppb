@@ -1,0 +1,1102 @@
+syntax = "proto3";
+option go_package="./;app";
+
+/***********************************
+* 描述: 心跳
+* CmdCode:CmdHeartBeat
+***********************************/
+//请求消息
+message heart_beat_req {
+  int64 timestamp = 1;  //客户端时间戳
+}
+//回复消息
+message heart_beat_resp {
+  int64 timestamp = 1;  //服务器时间戳
+}
+
+//玩家基础信息
+
+message player_base_info{
+  int32 player_id = 1;   //玩家ID
+  string nick_name = 2;  //玩家昵称
+  string avatar_url = 3; //头像地址url
+}
+
+//玩家信息
+message player_info{
+  player_base_info base_info = 1; //头像地址url
+  string le_dou_num = 2; //玩家乐豆
+  string ip_addr = 3;  //IP地址
+  string real_addr = 4; //真实地址
+  string real_name_sign = 5; //实名标志
+}
+
+/***********************************
+* 描述: 大厅登录认证
+* CmdCode:CmdHallLoginAuth
+***********************************/
+//请求消息
+message hall_login_auth_req {
+  string user_token = 1;   //用户登录token
+}
+//回复消息
+message hall_login_auth_resp {
+    player_info player_info = 1;  //用户信息
+}
+/***********************************
+* 描述: 大厅退出
+* CmdCode:CmdHallLogout
+***********************************/
+//请求消息
+message hall_logout_req {
+}
+//回复消息
+message hall_logout_resp {
+}
+
+/***********************************
+* 描述: 绑定手机号
+* CmdCode:CmdHallBindPhone
+***********************************/
+//请求消息
+message hall_bind_phone_req {
+  string phone = 1;   //手机号
+  string sms_code = 2; //短信验证码
+  string password = 3;   //密码
+}
+//回复消息
+message hall_bind_phone_resp {
+
+}
+
+
+/***********************************
+* 描述: 实名认证
+* CmdCode:CmdHallRealNameAuth
+***********************************/
+//请求消息
+message hall_real_name_auth_req {
+  string real_name = 1;   //真实名称
+  string ID_card_num = 2; //身份证号码
+}
+//回复消息
+message hall_real_name_auth_resp {
+
+}
+
+/***********************************
+* 描述: 位置授权
+* CmdCode:CmdHallPlayerLocation
+***********************************/
+//请求消息
+message hall_player_location_req {
+  string  real_location = 1;   //玩家定位
+}
+//回复消息
+message hall_location_auth_resp {
+
+}
+
+/***********************************
+* 描述: 玩家信息获取
+* CmdCode:CmdHallPlayerInfoGet
+***********************************/
+//请求消息
+message hall_player_info_get_req {
+}
+//回复消息
+message hall_player_info_get_resp {
+    player_info info = 1;
+}
+
+/***********************************
+* 描述: 客服信息
+* CmdCode:CmdHallCustomerServiceInfo
+***********************************/
+//请求消息
+message hall_customer_service_info_req {
+}
+//回复消息
+message hall_customer_service_info_resp {
+   string service_wei_xin = 1;    //服务微信
+  string service_url = 2;    //服务url
+}
+
+/***********************************
+* 描述: 反馈
+* CmdCode:CmdHallFeedback
+***********************************/
+//请求消息
+message hall_feedback_req {
+  string content = 1; //反馈内容
+  string player_wei_xin = 2; //玩家微信好
+}
+//回复消息
+message hall_feedback_resp {
+
+}
+
+/***********************************
+* 描述: 公告
+* CmdCode:CmdHallNotice
+***********************************/
+//请求消息
+message hall_notice_req {
+}
+//回复消息
+message hall_notice_resp {
+  repeated notice_info notices = 1;
+
+  message notice_info{
+      string title = 1;      //标题
+      string content = 2;    //内容
+      int64 time_stamp = 3;  //时间戳 1970-01-01 00:00:00 的毫秒数
+  }
+}
+
+/***********************************
+* 描述: 大厅消息
+* CmdCode:CmdHallMessage
+***********************************/
+//请求消息
+message hall_message_req {
+}
+//回复消息
+message hall_message_resp {
+
+}
+
+message game_player_info{
+  int32 player_id = 1;
+  string player_nick = 2;
+  int32 score = 3;
+}
+message GameBattleRecordInfo{
+  int64 record_id = 1;
+  int32 room_id = 2;
+  string game_name = 3;
+  int32 master_id = 4;
+  string master_name = 5;
+  int64 time_stamp = 6;  //时间戳 1970-01-01 00:00:00 的毫秒数
+  repeated game_player_info player_list = 7;
+
+}
+
+// 游戏每一局记录
+message GameBattleOnceRecord{
+  int32 once_id = 1;
+  int32 once_index = 2;
+  int64 time_stamp = 3;  //时间戳 1970-01-01 00:00:00 的毫秒数
+  repeated game_player_info player_list = 4;
+  string play_back_code = 5;
+}
+
+/***********************************
+* 描述: 大厅战绩列表
+* CmdCode:CmdHallBattleRecordList
+***********************************/
+//请求消息
+message hall_battle_record_list_req {
+  int32 page_index = 1;  //页索引，从第1页开始
+  int32 page_size = 2;   //页大小
+}
+//回复消息
+message hall_battle_record_list_resp {
+  int32 page_index = 1;  //页索引
+  int32 page_count = 2;  //页总数
+  repeated GameBattleRecordInfo record_list = 3;
+}
+/***********************************
+* 描述: 大厅战绩详情
+* CmdCode:CmdHallBattleRecordDetail
+***********************************/
+//请求消息
+message hall_battle_record_detail_req {
+  int64 record_id = 1;
+}
+//回复消息
+message hall_battle_record_detail_resp {
+  int64 record_id = 1;
+  int32 room_id = 2;
+  string game_name = 3;
+  int32 master_id = 4;
+  string master_name = 5;
+  int64 time_stamp = 6;  //时间戳 1970-01-01 00:00:00 的毫秒数
+  repeated  GameBattleOnceRecord once_record_list = 7;
+}
+
+/***********************************
+* 描述: 大厅战绩详情回放
+* CmdCode:CmdHallBattleRecordDetailPlayback
+***********************************/
+//请求消息
+message hall_battle_record_detail_play_back_req {
+  string play_back_code = 1;
+}
+//回复消息
+message hall_battle_record_detail_play_back_resp {
+  // 玩家操作，游戏设计完成后补充
+}
+
+/***********************************
+* 描述: 圈子加入申请
+* CmdCode:CmdCircleJoinApply
+***********************************/
+//请求消息
+message circle_join_apply_req {
+   int64 circle_id_or_no = 1;   //乐圈ID或者口令
+}
+//回复消息
+message circle_join_apply_resp {
+
+}
+
+//圈子基础信息
+enum circle_rule_type{
+  rule_no = 0 ;         // 预留
+  rule_master = 1;      //圈主
+  rule_super_admin = 2; //超级管理员
+  rule_admin = 3;       //管理员
+  rule_number = 4;      //圈子成员
+}
+
+//圈子基础信息
+message circle_info{
+  int32 circle_id = 1;        //圈子ID
+  string circle_image = 2;    //圈子图片
+  string circle_name = 3;     //圈子名称
+  string circle_notice = 4;     //圈子公告
+}
+
+//圈子玩家权限
+message circle_player_permission{
+  bool  permission_friend_score_set = 1;  //好友积分权限设置
+  bool  permission_play = 2;        //玩游戏权限
+  bool  permission_word = 3;        //发言前线
+  bool  permission_interact = 4;    //互动权限
+}
+
+//圈子玩家信息
+message circle_player_info{
+  player_base_info base_info = 1;          //基础信息
+  string score = 2;                       //玩家积分
+  string dou_num = 3;                     //欢乐豆数量
+  int32 friend_percentage = 4;            //自己好友特权百分比
+  circle_rule_type rule_type = 5;         //圈子权限
+  int32 agent_level =6;                   //代理等级 1：一级 ，2：二级.....
+  circle_player_permission  permission = 7;  //玩家权限
+}
+
+/***********************************
+* 描述: 圈子进入
+* CmdCode:CmdCircleEnter
+***********************************/
+//请求消息
+message circle_enter_req {
+}
+//回复消息
+message circle_enter_resp {
+  circle_info circle_info = 1;  //圈子信息
+  circle_player_info player_info = 2;  //玩家圈子信息
+}
+
+/***********************************
+* 描述: 圈子退回大厅
+* CmdCode:CmdCircleGoBackHall
+***********************************/
+//请求消息
+message circle_go_back_hall_req {
+}
+//回复消息
+message circle_go_back_hall_resp {
+}
+
+/***********************************
+* 描述: 圈子退出，与JoinApply对应
+* CmdCode:CmdCircleQuit
+***********************************/
+//请求消息
+message circle_quit_req {
+}
+//回复消息
+message circle_quit_resp {
+}
+
+/***********************************
+* 描述: 圈子信息设置
+* CmdCode:CmdCircleInfoSet
+***********************************/
+//请求消息
+message circle_info_set_req {
+  string circle_name = 1;   //圈子名字
+  string notice = 3;        //公告
+}
+//回复消息
+message circle_info_set_resp {
+
+}
+
+/***********************************
+* 描述: 圈子信息获取
+* CmdCode:CmdCircleInfoGet
+***********************************/
+//请求消息
+message circle_info_get_req {
+}
+//回复消息
+message circle_info_get_resp {
+  circle_info circle_info = 1; //圈子信息
+  player_base_info master_info = 2;      //圈主信息
+  int32 total_number_num = 3;       //所有成员数量
+  int32 online_number_num = 4;      //在线人数数量
+  int32 max_desk_num = 5;     //最大桌子数量
+}
+
+/***********************************
+* 描述: 圈子信息统计信息获取
+* CmdCode:CmdCircleInfoStatisticsGet
+***********************************/
+//请求消息
+message circle_info_statistics_get_req {
+}
+//回复消息
+message circle_info_statistics_get_resp {
+  enter_fee_info total_free = 1;          //总报名费信息
+  enter_fee_info friend_free = 2;         //总报名费信息
+  circle_score_info score_info = 3;       //积分信息
+  circle_create_desk_info desk_info = 4;  //开桌信息统计
+
+  //报名费信息
+  message enter_fee_info{
+    string today_score = 1;    //今天积分
+    string yesterday_score = 2;//昨天积分
+    string total_score = 3;    //总积分
+  }
+
+  //报名费信息
+  message circle_score_info{
+    string today_send = 1;     //今天赠送
+    string today_get = 2;      //今天获得
+    string total_score = 3;    //总积分
+  }
+
+  //开桌信息
+  message circle_create_desk_info{
+    int32 today_general = 1;     //今天普通数量
+    int32 today_promotion = 2;   //今天晋级数量
+    int32 total_general = 3;     //总普通数量
+    int32 total_promotion = 4;   //总晋级数量
+  }
+}
+
+//玩家排行信息
+message player_rank_info{
+  player_base_info player_info = 1;  //玩家信息
+  int32 rank = 2;                    //排名
+  string score = 3;                  //积分
+  int32 game_once_record_id = 4;     //游戏场次ID
+}
+
+/***********************************
+* 描述: 圈子信息竞技排行今天
+* CmdCode:CmdCircleInfoRankTodayGet
+***********************************/
+//请求消息
+message circle_info_rank_today_get_req {
+  int32 page_index = 1;  //页索引，从第1页开始
+  int32 page_size = 2;   //页大小
+}
+//回复消息
+message circle_info_rank_today_get_resp {
+  int32 page_index = 1;  //页索引
+  int32 page_count = 2;  //页总数
+  player_rank_info player_list = 3; //排行列表
+}
+
+/***********************************
+* 描述: 圈子信息竞技排行昨天
+* CmdCode:CmdCircleInfoRankYesterdayGet
+***********************************/
+//请求消息
+message circle_info_rank_yesterday_get_req {
+  int32 page_index = 1;  //页索引，从第1页开始
+  int32 page_size = 2;   //页大小
+}
+//回复消息
+message circle_info_rank_yesterday_get_resp {
+  int32 page_index = 1;  //页索引
+  int32 page_count = 2;  //页总数
+  player_rank_info player_list = 3; //排行列表
+
+}
+
+/***********************************
+* 描述: 圈子信息竞技排行周榜
+* CmdCode:CmdCircleInfoRankWeekGet
+***********************************/
+//请求消息
+message circle_info_rank_week_get_req {
+  int32 page_index = 1;  //页索引，从第1页开始
+  int32 page_size = 2;   //页大小
+}
+//回复消息
+message circle_info_rank_week_get_resp {
+  int32 page_index = 1;  //页索引
+  int32 page_count = 2;  //页总数
+  player_rank_info player_list = 3; //排行列表
+}
+
+/***********************************
+* 描述: 圈子胜点-乐圈清单记录
+* CmdCode:CmdCircleScoreCircleRecords
+***********************************/
+//请求消息
+message circle_score_circle_records_req {
+  int32 page_index = 1;  //页索引，从第1页开始
+  int32 page_size = 2;   //页大小
+}
+//回复消息
+message circle_score_circle_records_resp {
+  int32 page_index = 1;  //页索引
+  int32 page_count = 2;  //页总数
+  circle_score_record record_list = 3; //排行列表
+
+  message circle_score_record{
+    int32 record_id = 1;             //记录ID
+    string score_num = 2;            //操作分数数量，+，上分数，-下分数
+    player_base_info op_player = 3;  //操作玩家
+    int64 time_stamp = 4;            //时间戳 1970-01-01 00:00:00 的毫秒数
+  }
+}
+
+/***********************************
+* 描述: 圈子胜点-游戏清单记录
+* CmdCode:CmdCircleScoreGameRecords
+***********************************/
+//请求消息
+message circle_score_game_records_req {
+   //后面补
+}
+//回复消息
+message circle_score_game_records_resp {
+
+}
+
+/***********************************
+* 描述: 圈子设置管理员列表 最多五个
+* CmdCode:CmdCircleSettingAdminList
+***********************************/
+//请求消息
+message circle_setting_admin_list_req {
+
+}
+//回复消息
+message circle_setting_admin_list_resp {
+  repeated admin_info admin_list = 1;
+  //管理员信息
+  message admin_info{
+    player_base_info player_info = 1;  //玩家信息
+    circle_rule_type rule = 2;         //玩家权限
+  }
+}
+
+/***********************************
+* 描述: 圈子设置管理员添加
+* CmdCode:CmdCircleSettingAdminAdd
+***********************************/
+//请求消息
+message circle_setting_admin_add_req {
+  int32 player_id = 1;           //玩家ID
+  circle_rule_type rule = 2;     //玩家权限
+}
+//回复消息
+message circle_setting_admin_add_resp {
+
+}
+
+/***********************************
+* 描述: 圈子设置管理员删除
+* CmdCode:CmdCircleSettingAdminDelete
+***********************************/
+//请求消息
+message circle_setting_admin_delete_req {
+  int32 player_id = 1;           //玩家ID
+}
+//回复消息
+message circle_setting_admin_delete_resp {
+
+}
+
+/***********************************
+* 描述: 圈子管理员权限修改   超级管理员最多三个
+* CmdCode:CmdCircleSettingAdminModify
+***********************************/
+//请求消息
+message circle_setting_admin_modify_req {
+  int32 player_id = 1;           //玩家ID
+  circle_rule_type rule = 2;     //玩家权限
+}
+//回复消息
+message circle_setting_admin_modify_resp {
+
+}
+
+/***********************************
+* 描述: 圈子游戏记录
+* CmdCode:CmdCircleSettingGameRecords
+***********************************/
+//请求消息
+message circle_setting_game_records_req {
+  int32 page_index = 1;  //页索引，从第1页开始
+  int32 page_size = 2;   //页大小
+}
+//回复消息
+message circle_setting_game_records_resp {
+  int32 page_index = 1;  //页索引
+  int32 page_count = 2;  //页总数
+
+  message game_record_info{
+    int32 record_id = 1;                        //记录ID
+    int64 create_time_stamp = 2;                //创建时间戳
+    player_base_info master_info = 3;           //房主信息
+    repeated player_base_info player_list = 4;  //玩家信息
+  }
+}
+
+
+/***********************************
+* 描述: 圈子成员列表
+* CmdCode:CmdCircleNumberList
+***********************************/
+//请求消息
+message circle_number_list_req {
+  int32 page_index = 1;  //页索引，从第1页开始
+  int32 page_size = 2;   //页大小
+}
+//回复消息
+message circle_number_list_resp {
+  int32 page_index = 1;  //页索引
+  int32 page_count = 2;  //页总数
+  repeated circle_player_info number_list = 3;   //圈子成员列表
+  repeated bool subordinate_sign = 4;            //下级标志 ，和number_list一一对应
+
+}
+
+/***********************************
+* 描述: 圈子成员列表搜索
+* CmdCode:CmdCircleNumberListSearch
+***********************************/
+//请求消息
+message circle_number_list_search_req {
+   int32 player_id = 1;   //搜索ID
+}
+//回复消息
+message circle_number_list_search_resp {
+  circle_player_info player_info = 1;   //玩家信息
+  bool subordinate_sign = 2;
+}
+
+/***********************************
+* 描述: 圈子成员积分获取
+* CmdCode:CmdCircleNumberGamePermissionGet
+***********************************/
+//请求消息
+message circle_number_game_permission_get_req {
+}
+//回复消息
+message circle_number_game_permission_get_resp {
+
+}
+
+
+/***********************************
+* 描述: 圈子成员游戏权限获取
+* CmdCode:CmdCircleNumberGamePermissionSet
+***********************************/
+//请求消息
+message circle_number_game_permission_set_req {
+}
+//回复消息
+message circle_number_game_permission_set_resp {
+
+}
+
+/***********************************
+* 描述: 圈子成员积分设置
+* CmdCode:CmdCircleNumberScoreSet
+***********************************/
+//请求消息
+message circle_number_score_set_req {
+}
+//回复消息
+message circle_number_score_set_resp {
+
+}
+
+/***********************************
+* 描述: 圈子成员积分获取
+* CmdCode:CmdCircleNumberScoreGet
+***********************************/
+//请求消息
+message circle_number_score_get_req {
+}
+//回复消息
+message circle_number_score_get_resp {
+
+}
+
+
+/***********************************
+* 描述: 圈子成员状态
+* CmdCode:CmdCircleNumberStatus
+***********************************/
+//请求消息
+message circle_number_status_req {
+}
+//回复消息
+message circle_number_status_resp {
+
+}
+
+/***********************************
+* 描述: 圈子成员状态搜索
+* CmdCode:CmdCircleNumberStatusSearch
+***********************************/
+//请求消息
+message circle_number_status_search_req {
+}
+//回复消息
+message circle_number_status_search_resp {
+
+}
+
+/***********************************
+* 描述: 圈子好友管理朋友列表
+* CmdCode:CmdCircleFriendList
+***********************************/
+//请求消息
+message circle_friend_list_req {
+}
+//回复消息
+message circle_friend_list_resp {
+
+}
+
+
+/***********************************
+* 描述: 圈子好友管理积分操作权限，允许修改别人积分
+* CmdCode:CmdCircleFriendScorePermission
+***********************************/
+//请求消息
+message circle_friend_score_permission_req {
+}
+//回复消息
+message circle_friend_score_permission_resp {
+
+}
+
+/***********************************
+* 描述: 圈子好友管理绑定
+* CmdCode:CmdCircleFriendBind
+***********************************/
+//请求消息
+message circle_friend_bind_req {
+}
+//回复消息
+message circle_friend_bind_resp {
+
+}
+
+/***********************************
+* 描述: 圈子好友管理解绑
+* CmdCode:CmdCircleFriendUnBind
+***********************************/
+//请求消息
+message circle_friend_un_bind_req {
+}
+//回复消息
+message circle_friend_un_bind_resp {
+
+}
+
+
+/***********************************
+* 描述: 圈子好友管理中好友的好友列表
+* CmdCode:CmdCircleFriendFriendList
+***********************************/
+//请求消息
+message circle_friend_friend_list_req {
+}
+//回复消息
+message circle_friend_friend_list_resp {
+
+}
+
+/***********************************
+* 描述: 圈子好友管理中获取特权
+* CmdCode:CmdCircleFriendPermissionGet
+***********************************/
+//请求消息
+message circle_friend_permission_get_req {
+}
+//回复消息
+message circle_friend_permission_get_resp {
+
+}
+
+/***********************************
+* 描述: 圈子好友管理中设置特权
+* CmdCode:CmdCircleFriendPermissionSet
+***********************************/
+//请求消息
+message circle_friend_permission_set_req {
+}
+//回复消息
+message circle_friend_permission_set_resp {
+
+}
+
+
+/***********************************
+* 描述: 圈子好友管理添加好友
+* CmdCode:CmdCircleFriendAdd
+***********************************/
+//请求消息
+message circle_friend_add_req {
+}
+//回复消息
+message circle_friend_add_resp {
+
+}
+
+/***********************************
+* 描述: 圈子好友管理中邀请好友
+* CmdCode:CmdCircleFriendInvite
+***********************************/
+//请求消息
+message circle_friend_invite_req {
+}
+//回复消息
+message circle_friend_invite_resp {
+
+}
+
+/***********************************
+* 描述: 圈子好友管理统计详情
+* CmdCode:CmdCircleFriendStatisticsDetail
+***********************************/
+//请求消息
+message circle_friend_statistics_detail_req {
+}
+//回复消息
+message circle_friend_statistics_detail_resp {
+
+}
+
+
+/***********************************
+* 描述: 圈子消息通知
+* CmdCode:CmdCircleMsgNotify
+***********************************/
+//请求消息
+message circle_msg_notify {
+    circle_msg_type msg_type = 1;  // 新消息类型
+}
+
+enum circle_msg_type{
+  msg_no = 0;      //保留
+  msg_apply = 1;  //申请消息
+  msg_notice = 2;  //通知消息
+}
+
+message circle_msg_info{
+  int32 msg_id = 1;  //消息ID
+  circle_msg_type msg_type = 2;     //消息类型
+  string content = 3;               //消息内容
+  player_base_info send_player = 4; //发送玩家信息
+  bool read_sign = 5;               //已读标志
+  int64 time_stamp = 6;             //发送时间戳
+}
+
+/***********************************
+* 描述: 圈子消息列表
+* CmdCode:CmdCircleMsgList
+***********************************/
+//请求消息
+message circle_msg_list_req {
+  int32 page_index = 1;  //页索引，从第1页开始
+  int32 page_size = 2;   //页大小
+  circle_msg_type msg_type = 3;  //消息类型
+}
+//回复消息
+message circle_msg_list_resp {
+  int32 page_index = 1;  //页索引
+  int32 page_count = 2;  //页总数
+  repeated circle_msg_info  msg_list = 3;
+}
+
+
+/***********************************
+* 描述: 圈子消息读状态
+* CmdCode:CmdCircleMsgReadSign
+***********************************/
+//请求消息
+message circle_msg_read_sign_req {
+  repeated int32 msg_id = 1;   //已读消息ID
+}
+//回复消息
+message circle_msg_read_sign_resp {
+
+}
+
+/***********************************
+* 描述: 圈子消息处理玩家申请
+* CmdCode:CmdCircleMsgHandlePlayerApply
+***********************************/
+//请求消息
+message circle_msg_handle_player_apply_req {
+  int32 player_id = 1;    //允许玩家
+  handle_result result =2;  //结果
+  enum handle_result{
+    result_allow = 0;  //允许玩家加入
+    result_refuse = 1;  //拒绝玩家加入
+  }
+}
+//回复消息
+message circle_msg_handle_allow_join_resp {
+
+}
+
+
+/***********************************
+* 描述: 圈子游戏列表获取
+* CmdCode:CmdCircleGameListGet
+***********************************/
+//请求消息
+message circle_game_list_get_req {
+}
+//回复消息
+message circle_game_list_get_resp {
+  repeated circle_game_info game_list = 1;  // 游戏列表
+  message circle_game_info{
+    int32 game_id  = 1;   //游戏ID
+    int32 game_name = 2;  //游戏名称
+    game_type game_type = 3; //游戏类型
+  }
+}
+
+enum game_type{
+  game_no = 0; //保留
+  game_tui_tong_zi = 1;  //推筒子
+  game_zha_jin_hua = 2;  //扎金花
+}
+
+message game_config_tui_tong_zi{
+  int32 guo_di_score = 1;   //锅底
+  int64 max_multiple = 2;   //最大倍数，强制切锅
+  play_rule_type  play_rule = 3;    //玩法
+  bool dice_auto_sign = 4;    //摇骰子是否自动
+  bool dice_ban_sign = 5;     //摇骰子禁言标志
+  int32 trusteeship_time = 6; //托管时间，单位：s
+
+  enum play_rule_type{
+    rule_no = 0;           //保留
+    rule_28_gang = 1;      //二八杠，
+    rule_not_multiple = 2; //不翻倍
+  }
+}
+
+message game_config_zha_jin_hua{
+  game_num_type game_num = 1;   //局数
+  player_num_type player_num = 2; // 游戏人数
+  int32 di_score = 3;   //底分
+  int32 compare_card_round_num = 4;    //比牌轮数
+  int32 stuffy_card_round_num = 5;    //闷牌轮数
+  int32 max_round_num = 6;    //最大开牌轮数
+  int32 discard_card_time = 7;    //弃牌时间
+  int32 add_score_wait_time = 8;  //加分等待时间
+  int32 max_score = 9;  //封顶分数，0：表示不限
+  int32 bao_zi_reward_score = 10;  //豹子奖励分数
+  int32 look_compare_card_multiple = 11; //看牌比牌倍数
+  bool middle_enter_allow_sign = 12;   //允许中途加入标志
+  bool start_game_sign = 13;  //自动开局标志
+  bool crazy_multiple_sign = 14; //疯狂加倍标志
+
+  //游戏局数
+  enum game_num_type{
+    game_num_no = 0;           //保留
+    game_num_8 = 1;      //8局2豆
+    game_num_12 = 2;    //12局三豆
+    game_num_16 = 3;    //16局三豆
+  }
+  //人数局数
+  enum player_num_type{
+    player_num_no = 0;   //保留
+    player_num_5 = 1;   //5人
+    player_num_8 = 2;   //8人
+  }
+}
+
+//游戏房间信息
+message game_desk_setting_info{
+  int32 setting_id = 1;   //设置ID
+  string setting_name = 2; // 设置名称
+  int32 desk_type = 3;  //桌子类型，0 普通场。1 进级场
+  int32 allow_enter_min_score = 4;   // 允许进入最低分
+  bool  aa_sign = 5;    //AA标志  true:大家AA，false:大赢家出
+  int32 enter_fee = 6 ; //如果AA 每个玩家报名费， 如果大赢家出，大赢家的报名费
+  int32 win_max_player_score = 7;  //大赢家额外收取报名费分数
+  int32 extra_free = 8;            //抽取大玩家额外的报名费
+  int32 stop_min_score = 9;        //低于该分数，游戏暂停
+  bool auto_open_desk_sign = 10;   //自动开桌标志
+  game_type game_type = 11; //游戏类型
+  bytes game_config = 12;   //游戏类型对应配置
+
+}
+
+/***********************************
+* 描述: 圈子游戏开桌设置列表
+* CmdCode:CmdCircleGameDeskSettingList
+***********************************/
+//请求消息
+message circle_game_desktop_setting_list_req {
+
+}
+//回复消息
+message circle_game_desktop_setting_list_resp {
+  repeated game_desk_setting_info list = 1; //桌子列表
+}
+
+/***********************************
+* 描述: 圈子游戏开桌设置列表
+* CmdCode:CmdCircleGameDeskSettingAdd
+***********************************/
+//请求消息
+message circle_game_desktop_setting_add_req {
+  game_desk_setting_info setting = 1; //设置信息
+}
+//回复消息
+message circle_game_desktop_setting_add_resp {
+
+}
+/***********************************
+* 描述: 圈子游戏开桌设置列表
+* CmdCode:CmdCircleGameDeskSettingModify
+***********************************/
+//请求消息
+message circle_game_desktop_setting_modify_req {
+  game_desk_setting_info setting = 1; //设置信息
+}
+//回复消息
+message circle_game_desktop_setting_modify_resp {
+}
+/***********************************
+* 描述: 圈子开桌设置删除
+* CmdCode:CmdCircleGameDeskSettingDelete
+***********************************/
+//请求消息
+message circle_game_desktop_setting_delete_req {
+  int32 setting_id = 1;   //设置ID
+}
+//回复消息
+message circle_game_desktop_setting_delete_resp {
+}
+/***********************************
+* 描述: 修改开桌设置是否自动开桌
+* CmdCode:CmdCircleGameDeskSettingAutoOpenDesk
+***********************************/
+//请求消息
+message circle_game_desktop_setting_auto_open_req {
+  int32 setting_id = 1;   //设置ID
+  bool auto_open_sign = 2; //自动开桌标识
+}
+//回复消息
+message circle_game_desktop_setting_auto_open_resp {
+  repeated game_desk_setting_info list = 1; //桌子列表
+}
+
+
+message game_desk_player_info{
+  int32 player_id = 1;   //玩家ID
+  string player_name = 2;    //玩家名称
+  string player_avatar = 3;  //玩家头像
+  int32 position = 4;   //玩家座位
+}
+
+message game_desk_info{
+  int32 desk_id  = 1;  //桌子ID
+  string desk_no = 2;  //桌子编号
+  game_desk_setting_info room_info = 3;  //房间信息
+  repeated game_desk_player_info player_list = 4; //玩家列表
+}
+
+
+/***********************************
+* 描述: 圈子桌子获取
+* CmdCode:CmdCircleGameDeskListGet
+***********************************/
+//请求消息
+message circle_game_desk_list_req {
+  game_type game_type = 1; //游戏类型
+}
+//回复消息
+message circle_game_desk_list_resp {
+  repeated game_desk_info desk_list = 1; //桌子列表
+}
+
+/***********************************
+* 描述: 圈子桌子创建
+* CmdCode:CmdCircleGameDeskCreate
+***********************************/
+//请求消息
+message circle_game_desk_create_req {
+  int32 desk_setting_id = 1; //桌子设置ID
+}
+//回复消息
+message circle_game_desk_create_resp {
+   game_desk_info desk_info = 1; //桌子列表
+}
+
+/***********************************
+* 描述: 圈子桌子进入
+* CmdCode:CmdCircleGameDeskEnter
+***********************************/
+//请求消息
+message circle_game_desk_enter_req {
+  int32 desk_id = 1; //桌子ID
+}
+//回复消息
+message circle_game_desk_enter_resp {
+  game_desk_info desk_info = 1; //桌子列表
+}
+
+/***********************************
+* 描述: 圈子桌子玩家进入通知
+* CmdCode:CmdCircleGameDeskEnterNotice
+***********************************/
+//请求消息
+message circle_game_desk_enter_notice {
+  game_desk_player_info player_info = 1; //玩家列表
+}
+
+/***********************************
+* 描述: 圈子桌子离开
+* CmdCode:CmdCircleGameDeskLeave
+***********************************/
+//请求消息
+message circle_game_desk_leave_req {
+  int32 desk_id = 1; //桌子ID
+}
+//回复消息
+message circle_game_desk_leave_resp {
+
+}
+
+/***********************************
+* 描述: 圈子桌子玩家离开通知
+* CmdCode:CmdCircleGameDeskLeaveNotice
+***********************************/
+//请求消息
+message circle_game_desk_leave_notice {
+  int32 player_id = 1; //玩家ID
+}
