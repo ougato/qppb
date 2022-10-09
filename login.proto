@@ -1,4 +1,5 @@
 syntax = "proto3";
+package pb;
 option go_package="./;app";
 
 //登录模块采用http post请求 格式"application/x-protobuf"
