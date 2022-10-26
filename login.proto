@@ -29,7 +29,8 @@ message game_login_phone_sms_req {
 //回复消息
 message game_login_phone_sms_resp {
   string user_token = 1;   //玩家token
-  bool is_newer = 2;     //新用户
+  bool is_newer = 2;       //新用户
+  string gate_addr = 3;    //网关地址
 }
 
 /***********************************
@@ -44,6 +45,7 @@ message game_login_phone_password_req {
 //回复消息
 message game_login_phone_password_resp {
   string user_token = 1;   //玩家token
+  string gate_addr = 2;    //网关地址
 }
 
 /***********************************
@@ -70,4 +72,5 @@ message game_login_winxin_req {
 //回复消息
 message game_login_winxin_resp {
   string user_token = 1;   //玩家token
+  string gate_addr = 2;    //网关地址
 }

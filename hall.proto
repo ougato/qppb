@@ -29,7 +29,7 @@ message player_info{
   string le_dou_num = 2; //玩家乐豆
   string ip_addr = 3;  //IP地址
   string real_addr = 4; //真实地址
-  string real_name_sign = 5; //实名标志
+  bool real_name_sign = 5; //实名标志
 }
 
 /***********************************
@@ -120,7 +120,7 @@ message hall_customer_service_info_req {
 //回复消息
 message hall_customer_service_info_resp {
    string service_wei_xin = 1;    //服务微信
-  string service_url = 2;    //服务url
+   string service_url = 2;    //服务url
 }
 
 /***********************************
@@ -156,7 +156,7 @@ message hall_notice_resp {
 }
 
 /***********************************
-* 描述: 大厅消息
+* 描述: 大厅消息（直接用圈子消息）
 * CmdCode:CmdHallMessage
 ***********************************/
 //请求消息
@@ -271,9 +271,9 @@ message circle_info{
 
 //圈子玩家权限
 message circle_player_permission{
-  bool  permission_friend_score_set = 1;  //好友积分权限设置
+  bool  permission_friend_score_set = 1;  //好友积分设置权限
   bool  permission_play = 2;        //玩游戏权限
-  bool  permission_word = 3;        //发言前线
+  bool  permission_word = 3;        //发言权限
   bool  permission_interact = 4;    //互动权限
 }
 
@@ -598,7 +598,7 @@ message circle_number_list_search_resp {
 }
 
 /***********************************
-* 描述: 圈子成员积分获取
+* 描述: 圈子成员游戏权限获取
 * CmdCode:CmdCircleNumberGamePermissionGet
 ***********************************/
 //请求消息
@@ -611,7 +611,7 @@ message circle_number_game_permission_get_resp {
 
 
 /***********************************
-* 描述: 圈子成员游戏权限获取
+* 描述: 圈子成员游戏权限设置
 * CmdCode:CmdCircleNumberGamePermissionSet
 ***********************************/
 //请求消息
@@ -859,8 +859,9 @@ message circle_msg_handle_player_apply_req {
   int32 player_id = 1;    //允许玩家
   handle_result result =2;  //结果
   enum handle_result{
-    result_allow = 0;  //允许玩家加入
-    result_refuse = 1;  //拒绝玩家加入
+    result_none = 0;   //未处理
+    result_allow = 1;   //允许玩家加入
+    result_refuse = 2;  //拒绝玩家加入
   }
 }
 //回复消息
