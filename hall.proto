@@ -99,6 +99,31 @@ message hall_location_auth_resp {
 }
 
 /***********************************
+* 描述: 玩家昵称修改
+* CmdCode:CmdHallPlayerNicknameModify
+***********************************/
+//请求消息
+message hall_player_nickname_modify_req {
+  string  nick_name = 1;   //玩家昵称
+}
+//回复消息
+message hall_player_nickname_modify_resp {
+
+}
+/***********************************
+* 描述: 玩家头像修改
+* CmdCode:CmdHallPlayerAvatarModify
+***********************************/
+//请求消息
+message hall_player_avatar_modify_req {
+  string  avatar_url = 1;   //玩家头像
+}
+//回复消息
+message hall_player_avatar_modify_resp {
+
+}
+
+/***********************************
 * 描述: 玩家信息获取
 * CmdCode:CmdHallPlayerInfoGet
 ***********************************/

@@ -26,14 +26,16 @@ enum CmdCode{
   CmdHallBindPhone = 2003;            //绑定手机号
   CmdHallRealNameAuth = 2004;         //实名认证
   CmdHallPlayerLocation = 2005;       //玩家位置
-  CmdHallPlayerInfoGet = 2006;        //玩家信息获取
-  CmdHallCustomerServiceInfo = 2007;  //客服信息
-  CmdHallFeedback = 2008;             //反馈
-  CmdHallNotice = 2009;               //公告
-  CmdHallMessage = 20010;              //大厅消息
-  CmdHallBattleRecordList = 2011;         //大厅战绩列表
-  CmdHallBattleRecordDetail = 2012;         //大厅战绩详情
-  CmdHallBattleRecordDetailPlayback = 2013;   //大厅战绩详情回放
+  CmdHallPlayerNicknameModify = 2006; //玩家昵称修改
+  CmdHallPlayerAvatarModify = 2007;   //玩家头像修改
+  CmdHallPlayerInfoGet = 2008;        //玩家信息获取
+  CmdHallCustomerServiceInfo = 2009;  //客服信息
+  CmdHallFeedback = 2010;             //反馈
+  CmdHallNotice = 2011;               //公告
+  CmdHallMessage = 20012;              //大厅消息
+  CmdHallBattleRecordList = 2013;         //大厅战绩列表
+  CmdHallBattleRecordDetail = 2014;         //大厅战绩详情
+  CmdHallBattleRecordDetailPlayback = 2015;   //大厅战绩详情回放
 
   CmdCircleJoinApply = 2101;                //圈子加入申请
   CmdCircleEnter = 2102;                //圈子进入
