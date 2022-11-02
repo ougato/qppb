@@ -76,7 +76,7 @@ message game_login_winxin_resp {
 
 /***********************************
 * 描述: 获取链接地址
-* url:/
+* url:/game/addr
 ***********************************/
 //请求消息
 message game_addr_req {
