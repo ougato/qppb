@@ -63,10 +63,36 @@ message hall_logout_resp {
 message hall_bind_phone_req {
   string phone = 1;   //手机号
   string sms_code = 2; //短信验证码
-  string password = 3;   //密码
 }
 //回复消息
 message hall_bind_phone_resp {
+
+}
+
+/***********************************
+* 描述: 设置密码
+* CmdCode:CmdHallPasswordSet
+***********************************/
+//请求消息
+message hall_password_set_req {
+  string password = 1;   //密码
+}
+//回复消息
+message hall_password_set_resp {
+
+}
+
+/***********************************
+* 描述: 重置密码
+* CmdCode:CmdHallPasswordReset
+***********************************/
+//请求消息
+message hall_password_reset_req {
+  string sms_code = 1; //短信验证码
+  string password = 2;   //密码
+}
+//回复消息
+message hall_password_reset_resp {
 
 }
 
