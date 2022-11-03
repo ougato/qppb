@@ -78,7 +78,7 @@ message game_login_winxin_resp {
 ***********************************/
 //请求消息
 message game_addr_req {
-  string access_token = 1;  //登录token
+  string user_token = 1;   //玩家token
 }
 
 message game_addr_resp {
