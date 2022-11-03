@@ -44,7 +44,6 @@ message game_login_phone_password_req {
 //回复消息
 message game_login_phone_password_resp {
   string user_token = 1;   //玩家token
-  string gate_addr = 2;    //网关地址
 }
 
 /***********************************
@@ -71,7 +70,6 @@ message game_login_winxin_req {
 //回复消息
 message game_login_winxin_resp {
   string user_token = 1;   //玩家token
-  string gate_addr = 2;    //网关地址
 }
 
 /***********************************
