@@ -30,6 +30,8 @@ message player_info{
   string ip_addr = 3;  //IP地址
   string real_addr = 4; //真实地址
   bool real_name_sign = 5; //实名标志
+  int64 circle_id = 6;    //圈子ID
+  int64 desk_id = 7;      //桌子ID
 }
 
 /***********************************
@@ -206,17 +208,6 @@ message hall_notice_resp {
   }
 }
 
-/***********************************
-* 描述: 大厅消息（直接用圈子消息）
-* CmdCode:CmdHallMessage
-***********************************/
-//请求消息
-message hall_message_req {
-}
-//回复消息
-message hall_message_resp {
-
-}
 
 message game_player_info{
   int32 player_id = 1;
