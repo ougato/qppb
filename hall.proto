@@ -308,7 +308,8 @@ message circle_info{
   int32 circle_id = 1;        //圈子ID
   string circle_image = 2;    //圈子图片
   string circle_name = 3;     //圈子名称
-  string circle_notice = 4;     //圈子公告
+  string roll_notice = 4;     //滚动公告
+  string circle_notice = 5;   //圈子公告
 }
 
 //圈子玩家权限
@@ -372,6 +373,7 @@ message circle_quit_resp {
 //请求消息
 message circle_info_set_req {
   string circle_name = 1;   //圈子名字
+  string roll_notice = 2;   //滚动公告
   string notice = 3;        //公告
 }
 //回复消息
@@ -898,7 +900,7 @@ message circle_msg_read_sign_resp {
 ***********************************/
 //请求消息
 message circle_msg_handle_player_apply_req {
-  int32 player_id = 1;    //允许玩家
+  int32 msg_id = 1;         //消息ID
   handle_result result =2;  //结果
   enum handle_result{
     result_none = 0;   //未处理
@@ -907,7 +909,7 @@ message circle_msg_handle_player_apply_req {
   }
 }
 //回复消息
-message circle_msg_handle_allow_join_resp {
+message circle_msg_handle_player_apply_resp {
 
 }
 
