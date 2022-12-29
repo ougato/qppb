@@ -875,7 +875,8 @@ message circle_msg_list_req {
 message circle_msg_list_resp {
   int32 page_index = 1;  //页索引
   int32 page_count = 2;  //页总数
-  repeated circle_msg_info  msg_list = 3;
+  circle_msg_type msg_type = 3;  //消息类型
+  repeated circle_msg_info  msg_list = 4;
 }
 
 
