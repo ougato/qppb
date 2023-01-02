@@ -63,20 +63,20 @@ enum CmdCode{
   CmdCircleSettingAdminModify = 2206;      //圈子设置权力修改  超级管理员最多三个
   CmdCircleSettingGameRecords = 2207;       //圈子游戏记录
 
-  CmdCircleNumberList = 2301;    //圈子成员列表
-  CmdCircleNumberListSearch = 2302;    //圈子成员列表搜索
-  CmdCircleNumberGamePermissionSet = 2303;         //圈子成员游戏权限获取
-  CmdCircleNumberScoreChange = 2304;              //圈子成员积分修改
-  CmdCircleNumberStatus = 2305;    //圈子成员状态
-  CmdCircleNumberStatusSearch = 2306;    //圈子成员状态搜索
-  CmdCircleFriendList = 2310;    //圈子好友管理朋友列表
-  CmdCircleFriendBind = 2312;   //圈子好友管理绑定
-  CmdCircleFriendUnBind = 2313;   //圈子好友管理解绑
-  CmdCircleFriendFriendList = 2314;   //圈子好友管理中好友的好友列表
-  CmdCircleFriendPermissionSet = 2316;   //圈子好友管理中设置特权
-  CmdCircleFriendAdd = 2317;   //圈子好友管理添加好友
-  CmdCircleFriendInvite = 2318;   //圈子好友管理中邀请好友
-  CmdCircleFriendStatisticsDetail = 2319;   //圈子好友管理统计详情
+  CmdCircleNumberList = 2301;                  //圈子成员列表
+  CmdCircleNumberStatus = 2302;                //圈子成员状态
+  CmdCircleNumberInfoGet = 2303;               //圈子成员信息获取
+  CmdCircleNumberGamePermissionSet = 2304;     //圈子成员游戏权限获取
+  CmdCircleNumberScoreChange = 2305;           //圈子成员积分修改
+  CmdCircleFriendList = 2306;                  //圈子好友管理朋友列表
+  CmdCircleFriendScorePermission = 2307;       //圈子好友管理积分操作权限，允许修改别人积分
+  CmdCircleFriendPrivilegeSet = 2308;          //圈子好友管理中设置特权
+  CmdCircleFriendBind = 2309;                  //圈子好友管理绑定
+  CmdCircleFriendUnBind = 2310;                //圈子好友管理解绑
+  CmdCircleFriendFriendList = 2311;            //圈子好友管理中好友的好友列表
+  CmdCircleFriendAdd = 2312;                   //圈子好友管理添加好友
+  CmdCircleFriendInvite = 2313;                //圈子好友管理中邀请好友
+  CmdCircleFriendStatisticsDetail = 2314;      //圈子好友管理统计详情
 
 
   CmdCircleMsgNotify = 2401;   //圈子消息通知

@@ -322,13 +322,15 @@ message circle_player_permission{
 
 //圈子玩家信息
 message circle_player_info{
-  player_base_info base_info = 1;          //基础信息
-  string score = 2;                       //玩家积分
-  string dou_num = 3;                     //欢乐豆数量
-  int32 friend_percentage = 4;            //自己好友特权百分比
-  circle_rule_type rule_type = 5;         //圈子权限
-  int32 agent_level =6;                   //代理等级 1：一级 ，2：二级.....
-  circle_player_permission  permission = 7;  //玩家权限
+  player_base_info base_info = 1;            //基础信息
+  string score = 2;                          //玩家积分
+  string dou_num = 3;                        //欢乐豆数量
+  int32 privilege_percentage = 4;            //自己特权百分比
+  int32 friend_privilege_percentage = 5;     //自己好友特权百分比
+  circle_rule_type rule_type = 6;            //圈子权限
+  int32 agent_level =7;                      //代理等级 1：一级 ，2：二级.....
+  circle_player_permission  permission = 8;  //玩家权限
+  bool allow_score_be_modify = 9;            //循序自己积分被修改
 }
 
 /***********************************
@@ -404,34 +406,33 @@ message circle_info_get_resp {
 //请求消息
 message circle_info_statistics_get_req {
 }
+//报名费信息
+message statistics_enter_fee_info{
+  string today_score = 1;    //今天积分
+  string yesterday_score = 2;//昨天积分
+  string total_score = 3;    //总积分
+}
+
+//报名费信息
+message statistics_circle_score_info{
+  string today_send = 1;     //今天赠送
+  string today_get = 2;      //今天获得
+  string total_score = 3;    //总积分
+}
+
+//开桌信息
+message statistics_circle_create_desk_info{
+  int32 today_general = 1;     //今天普通数量
+  int32 today_promotion = 2;   //今天晋级数量
+  int32 total_general = 3;     //总普通数量
+  int32 total_promotion = 4;   //总晋级数量
+}
 //回复消息
 message circle_info_statistics_get_resp {
-  enter_fee_info total_free = 1;          //总报名费信息
-  enter_fee_info friend_free = 2;         //总报名费信息
-  circle_score_info score_info = 3;       //积分信息
-  circle_create_desk_info desk_info = 4;  //开桌信息统计
-
-  //报名费信息
-  message enter_fee_info{
-    string today_score = 1;    //今天积分
-    string yesterday_score = 2;//昨天积分
-    string total_score = 3;    //总积分
-  }
-
-  //报名费信息
-  message circle_score_info{
-    string today_send = 1;     //今天赠送
-    string today_get = 2;      //今天获得
-    string total_score = 3;    //总积分
-  }
-
-  //开桌信息
-  message circle_create_desk_info{
-    int32 today_general = 1;     //今天普通数量
-    int32 today_promotion = 2;   //今天晋级数量
-    int32 total_general = 3;     //总普通数量
-    int32 total_promotion = 4;   //总晋级数量
-  }
+  statistics_enter_fee_info total_free = 1;          //总报名费信息
+  statistics_enter_fee_info friend_free = 2;         //总报名费信息
+  statistics_circle_score_info score_info = 3;       //积分信息
+  statistics_circle_create_desk_info desk_info = 4;  //开桌信息统计
 }
 
 /***********************************
@@ -443,6 +444,10 @@ message circle_info_statistics_clear_req {
 }
 //回复消息
 message circle_info_statistics_clear_resp {
+  statistics_enter_fee_info total_free = 1;          //总报名费信息
+  statistics_enter_fee_info friend_free = 2;         //总报名费信息
+  statistics_circle_score_info score_info = 3;       //积分信息
+  statistics_circle_create_desk_info desk_info = 4;  //开桌信息统计
 }
 
 //玩家排行信息
@@ -605,42 +610,35 @@ message circle_setting_game_records_resp {
 message circle_number_list_req {
   int32 page_index = 1;  //页索引，从第1页开始
   int32 page_size = 2;   //页大小
+  int32 search_id = 3;   //搜索ID,0:表示不搜索
 }
 //回复消息
 message circle_number_list_resp {
   int32 page_index = 1;  //页索引
   int32 page_count = 2;  //页总数
-  repeated circle_player_info number_list = 3;   //圈子成员列表
-  repeated bool subordinate_sign = 4;            //下级标志 ，和number_list一一对应
+  repeated number_info number_list = 3;   //圈子成员列表
 
+  message number_info{
+    player_base_info base_info = 1;          //基础信息
+    circle_rule_type rule_type = 2;         //圈子权限
+    int32 agent_level =3;                   //代理等级 1：一级 ，2：二级.....
+    bool subordinate_sign = 4;
+  }
 }
 
-/***********************************
-* 描述: 圈子成员列表搜索
-* CmdCode:CmdCircleNumberListSearch
-***********************************/
-//请求消息
-message circle_number_list_search_req {
-   int32 player_id = 1;   //搜索ID
-}
-//回复消息
-message circle_number_list_search_resp {
-  circle_player_info player_info = 1;   //玩家信息
-  bool subordinate_sign = 2;
-}
 
 /***********************************
-* 描述: 圈子成员游戏权限获取
-* CmdCode:CmdCircleNumberGamePermissionGet
+* 描述: 获取圈子成员信息
+* CmdCode:CmdCircleNumberInfoGet
 ***********************************/
 //请求消息
-message circle_number_game_permission_get_req {
+message circle_number_info_get_req {
+  int32 player_id = 1;   //玩家ID
 }
 //回复消息
-message circle_number_game_permission_get_resp {
-
+message circle_number_info_get_resp {
+  circle_player_info info = 1; //玩家信息
 }
-
 
 /***********************************
 * 描述: 圈子成员游戏权限设置
@@ -648,10 +646,13 @@ message circle_number_game_permission_get_resp {
 ***********************************/
 //请求消息
 message circle_number_game_permission_set_req {
+  int32 player_id = 1;                   //玩家ID
+  circle_player_permission  permission = 2;  //玩家权限
 }
 //回复消息
 message circle_number_game_permission_set_resp {
-
+  int32 player_id = 1;                   //玩家ID
+  circle_player_permission  permission = 2;  //玩家当前权限
 }
 
 /***********************************
@@ -660,48 +661,54 @@ message circle_number_game_permission_set_resp {
 ***********************************/
 //请求消息
 message circle_number_score_set_req {
+  int32 player_id = 1;      //玩家ID
+  int32 change_value = 2;   //改变值
 }
 //回复消息
 message circle_number_score_set_resp {
-
-}
-
-/***********************************
-* 描述: 圈子成员积分获取
-* CmdCode:CmdCircleNumberScoreGet
-***********************************/
-//请求消息
-message circle_number_score_get_req {
-}
-//回复消息
-message circle_number_score_get_resp {
-
+  int32 player_id = 1;     //玩家ID
+  int32 score_value = 2;   //分数值
 }
 
 
 /***********************************
 * 描述: 圈子成员状态
-* CmdCode:CmdCircleNumberStatus
+* CmdCode:CmdCircleNumberStatus     管理员、超管、圈主才可以
 ***********************************/
 //请求消息
 message circle_number_status_req {
+  int32 page_index = 1;  //页索引，从第1页开始
+  int32 page_size = 2;   //页大小
+  status_type status = 3; //成员状态
+  int32 search_id = 4;   //搜索ID,0:表示不搜索
+
+  enum status_type{
+    status_all = 0 ;     //所有
+    status_idle = 1;     //空闲
+    status_offline = 2;  //离线
+    status_loss = 3;     //流失
+    status_score_0 = 4;  //积分为0
+  }
 }
 //回复消息
 message circle_number_status_resp {
+  int32 page_index = 1;  //页索引
+  int32 page_count = 2;  //页总数
+  repeated number_info number_list = 3;   //圈子成员列表
 
+  message number_info{
+    player_base_info base_info = 1;          //基础信息
+    int32 score =2;                          //分数
+    status_type status = 3;                  //状态
+  }
+  enum status_type{
+    status_none = 0 ;     //位置
+    status_idle = 1;     //空闲
+    status_offline = 2;  //离线
+    status_game = 3;     //游戏中
+  }
 }
 
-/***********************************
-* 描述: 圈子成员状态搜索
-* CmdCode:CmdCircleNumberStatusSearch
-***********************************/
-//请求消息
-message circle_number_status_search_req {
-}
-//回复消息
-message circle_number_status_search_resp {
-
-}
 
 /***********************************
 * 描述: 圈子好友管理朋友列表
@@ -709,12 +716,24 @@ message circle_number_status_search_resp {
 ***********************************/
 //请求消息
 message circle_friend_list_req {
+  int32 page_index = 1;  //页索引，从第1页开始
+  int32 page_size = 2;   //页大小
+  int32 search_id = 3;   //搜索ID,0:表示不搜索
 }
 //回复消息
 message circle_friend_list_resp {
+  int32 page_index = 1;  //页索引
+  int32 page_count = 2;  //页总数
+  repeated friend_info number_list = 3;   //圈子成员列表
 
+  message friend_info{
+    player_base_info base_info = 1;         //基础信息
+    string score = 2;                       //玩家积分
+    int32 friend_percentage = 3;            //自己好友特权百分比
+    int32 friend_count = 4;                 //好友数量
+    bool score_permission = 5;              //积分操作权限
+  }
 }
-
 
 /***********************************
 * 描述: 圈子好友管理积分操作权限，允许修改别人积分
@@ -722,14 +741,34 @@ message circle_friend_list_resp {
 ***********************************/
 //请求消息
 message circle_friend_score_permission_req {
+  int32 player_id = 1;                   //玩家ID
+  bool score_permission = 2;             //积分操作权限
 }
 //回复消息
 message circle_friend_score_permission_resp {
-
+  int32 player_id = 1;                   //玩家ID
+  bool score_permission = 2;             //积分操作权限
 }
 
+
 /***********************************
-* 描述: 圈子好友管理绑定
+* 描述: 圈子好友管理中设置特权
+* CmdCode:CmdCircleFriendPrivilegeSet
+***********************************/
+//请求消息
+message circle_friend_privilege_set_req {
+  int32 player_id = 1;                    //玩家ID
+  int32 friend_privilege_percentage = 2;  //好友特权百分比
+}
+//回复消息
+message circle_friend_Privilege_set_resp {
+  int32 player_id = 1;                    //玩家ID
+  int32 friend_privilege_percentage = 2;  //好友特权百分比
+}
+
+
+/***********************************
+* 描述: 圈子好友管理绑定 (暂时不做)
 * CmdCode:CmdCircleFriendBind
 ***********************************/
 //请求消息
@@ -746,12 +785,12 @@ message circle_friend_bind_resp {
 ***********************************/
 //请求消息
 message circle_friend_un_bind_req {
+  int32 player_id = 1;      //玩家ID
 }
 //回复消息
 message circle_friend_un_bind_resp {
 
 }
-
 
 /***********************************
 * 描述: 圈子好友管理中好友的好友列表
@@ -759,39 +798,26 @@ message circle_friend_un_bind_resp {
 ***********************************/
 //请求消息
 message circle_friend_friend_list_req {
+  int32 page_index = 1;  //页索引，从第1页开始
+  int32 page_size = 2;   //页大小
+  int32 item_player_id = 3;   //目标玩家ID
+  int32 search_id = 4;   //搜索ID,0:表示不搜索
 }
 //回复消息
 message circle_friend_friend_list_resp {
+  int32 page_index = 1;  //页索引
+  int32 page_count = 2;  //页总数
+  repeated friend_info number_list = 3;   //圈子成员列表
 
-}
-
-/***********************************
-* 描述: 圈子好友管理中获取特权
-* CmdCode:CmdCircleFriendPermissionGet
-***********************************/
-//请求消息
-message circle_friend_permission_get_req {
-}
-//回复消息
-message circle_friend_permission_get_resp {
-
-}
-
-/***********************************
-* 描述: 圈子好友管理中设置特权
-* CmdCode:CmdCircleFriendPermissionSet
-***********************************/
-//请求消息
-message circle_friend_permission_set_req {
-}
-//回复消息
-message circle_friend_permission_set_resp {
-
+  message friend_info{
+    player_base_info base_info = 1;       //基础信息
+    bool friend_sign = 4;                 //目标玩家的好友标志
+  }
 }
 
 
 /***********************************
-* 描述: 圈子好友管理添加好友
+* 描述: 圈子好友管理添加好友  (暂时不做)
 * CmdCode:CmdCircleFriendAdd
 ***********************************/
 //请求消息
@@ -808,14 +834,15 @@ message circle_friend_add_resp {
 ***********************************/
 //请求消息
 message circle_friend_invite_req {
+
 }
 //回复消息
 message circle_friend_invite_resp {
-
+   int64 code = 1;  //玩家口令
 }
 
 /***********************************
-* 描述: 圈子好友管理统计详情
+* 描述: 圈子好友管理统计详情 (暂时不做)
 * CmdCode:CmdCircleFriendStatisticsDetail
 ***********************************/
 //请求消息
@@ -825,6 +852,8 @@ message circle_friend_statistics_detail_req {
 message circle_friend_statistics_detail_resp {
 
 }
+
+
 
 
 /***********************************
