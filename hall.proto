@@ -481,7 +481,7 @@ message circle_info_rank_get_resp {
   int32 page_index = 1;  //页索引
   int32 page_count = 2;  //页总数
   rank_type rank_type = 3; //排行类型
-  player_rank_info player_list = 4; //排行列表
+  repeated player_rank_info player_list = 4; //排行列表
 }
 
 /***********************************
