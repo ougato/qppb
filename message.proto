@@ -52,9 +52,10 @@ enum CmdCode{
   CmdCircleInfoSet = 2106;                //圈子信息设置
   CmdCircleInfoGet = 2107;                //圈子信息获取
   CmdCircleInfoStatisticsGet = 2108;                //圈子信息统计信息获取
-  CmdCircleInfoRankTodayGet = 2109;                //圈子信息竞技排行今天
-  CmdCircleInfoRankYesterdayGet = 2110;                //圈子信息竞技排行昨天
-  CmdCircleInfoRankWeekGet = 2111;                //圈子信息竞技排行周榜
+  CmdCircleInfoStatisticsClear = 2109;              //圈子信息统计信息清除
+  CmdCircleInfoRankTodayGet = 2110;                //圈子信息竞技排行今天
+  CmdCircleInfoRankYesterdayGet = 2111;                //圈子信息竞技排行昨天
+  CmdCircleInfoRankWeekGet = 2112;                //圈子信息竞技排行周榜
 
   CmdCircleScoreCircleRecords = 2201;       //圈子胜点-乐圈清单记录
   CmdCircleScoreGameRecords = 2202;         //圈子胜点-游戏清单记录

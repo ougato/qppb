@@ -434,6 +434,17 @@ message circle_info_statistics_get_resp {
   }
 }
 
+/***********************************
+* 描述: 圈子信息统计信息清除
+* CmdCode:CmdCircleInfoStatisticsClear
+***********************************/
+//请求消息
+message circle_info_statistics_clear_req {
+}
+//回复消息
+message circle_info_statistics_clear_resp {
+}
+
 //玩家排行信息
 message player_rank_info{
   player_base_info player_info = 1;  //玩家信息
@@ -442,53 +453,30 @@ message player_rank_info{
   int32 game_once_record_id = 4;     //游戏场次ID
 }
 
-/***********************************
-* 描述: 圈子信息竞技排行今天
-* CmdCode:CmdCircleInfoRankTodayGet
-***********************************/
-//请求消息
-message circle_info_rank_today_get_req {
-  int32 page_index = 1;  //页索引，从第1页开始
-  int32 page_size = 2;   //页大小
-}
-//回复消息
-message circle_info_rank_today_get_resp {
-  int32 page_index = 1;  //页索引
-  int32 page_count = 2;  //页总数
-  player_rank_info player_list = 3; //排行列表
+//排行类型
+enum rank_type{
+    rank_none = 0;
+    rank_today = 1;    //今天
+    rank_yesterday = 2;//昨天
+    rank_weekly = 3;   //过去一周
 }
 
 /***********************************
-* 描述: 圈子信息竞技排行昨天
-* CmdCode:CmdCircleInfoRankYesterdayGet
+* 描述: 圈子信息竞技排行
+* CmdCode:CmdCircleInfoRankGet
 ***********************************/
 //请求消息
-message circle_info_rank_yesterday_get_req {
-  int32 page_index = 1;  //页索引，从第1页开始
-  int32 page_size = 2;   //页大小
+message circle_info_rank_get_req {
+  int32 page_index = 1;    //页索引，从第1页开始
+  int32 page_size = 2;     //页大小
+  rank_type rank_type = 3; //排行类型
 }
 //回复消息
-message circle_info_rank_yesterday_get_resp {
+message circle_info_rank_get_resp {
   int32 page_index = 1;  //页索引
   int32 page_count = 2;  //页总数
-  player_rank_info player_list = 3; //排行列表
-
-}
-
-/***********************************
-* 描述: 圈子信息竞技排行周榜
-* CmdCode:CmdCircleInfoRankWeekGet
-***********************************/
-//请求消息
-message circle_info_rank_week_get_req {
-  int32 page_index = 1;  //页索引，从第1页开始
-  int32 page_size = 2;   //页大小
-}
-//回复消息
-message circle_info_rank_week_get_resp {
-  int32 page_index = 1;  //页索引
-  int32 page_count = 2;  //页总数
-  player_rank_info player_list = 3; //排行列表
+  rank_type rank_type = 3; //排行类型
+  player_rank_info player_list = 4; //排行列表
 }
 
 /***********************************
