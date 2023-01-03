@@ -928,7 +928,7 @@ message circle_msg_handle_player_apply_req {
 }
 //回复消息
 message circle_msg_handle_player_apply_resp {
-
+  int32 msg_id = 1;         //消息ID
 }
 
 
