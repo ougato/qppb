@@ -82,7 +82,8 @@ enum CmdCode{
   CmdCircleMsgNotify = 2401;   //圈子消息通知
   CmdCircleMsgList = 2402;   //圈子消息列表
   CmdCircleMsgReadSign = 2403;   //圈子消息读状态
-  CmdCircleMsgHandlePlayerApply = 2404;   //圈子消息处理玩家申请
+  CmdCircleMsgHandlePlayerApply = 2404; //圈子消息处理玩家申请
+  CmdCircleJoinNotify = 2405;           //圈子加入通知
 
   CmdCircleGameListGet = 2501;           //圈子游戏列表获取
   CmdCircleGameDeskSettingList = 2502;           //圈子游戏开桌设置列表
@@ -96,6 +97,8 @@ enum CmdCode{
   CmdCircleGameDeskEnterNotice = 2510;      //圈子桌子玩家进入消息通知
   CmdCircleGameDeskLeave = 2511;           //圈子桌子离开
   CmdCircleGameDeskLeaveNotice = 2523;     //圈子桌子玩家离开消息通知
+
+
 
 
   CmdZJHModule = 3000;  //炸金花模块指令 3000-3999

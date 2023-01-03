@@ -931,6 +931,15 @@ message circle_msg_handle_player_apply_resp {
   int32 msg_id = 1;         //消息ID
 }
 
+/***********************************
+* 描述: 圈子消息通知
+* CmdCode:CmdCircleJoinNotify
+***********************************/
+//请求消息
+message circle_join_notify {
+  int32 circle_id = 1;  // 圈子ID
+}
+
 
 /***********************************
 * 描述: 圈子游戏列表获取
