@@ -380,7 +380,9 @@ message circle_info_set_req {
 }
 //回复消息
 message circle_info_set_resp {
-
+  string circle_name = 1;   //圈子名字
+  string roll_notice = 2;   //滚动公告
+  string notice = 3;        //公告
 }
 
 /***********************************
