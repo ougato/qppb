@@ -667,8 +667,8 @@ message circle_number_score_set_req {
 //回复消息
 message circle_number_score_set_resp {
   int32 player_id = 1;            //玩家ID
-  int32 player_score = 2;         //玩家积分
-  int32 self_score = 3;           //自己积分
+  string player_score = 2;         //玩家积分
+  string self_score = 3;           //自己积分
 }
 
 /***********************************
@@ -677,7 +677,7 @@ message circle_number_score_set_resp {
 ***********************************/
 //请求消息
 message circle_number_score_change_notify {
-  int32 score = 1;   //积分值
+  string score = 1;   //当前积分值
 }
 
 
