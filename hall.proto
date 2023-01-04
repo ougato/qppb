@@ -672,7 +672,7 @@ message circle_number_score_set_resp {
 }
 
 /***********************************
-* 描述: 圈子成员积分设置
+* 描述: 圈子成员积分改变通知
 * CmdCode:CmdCircleNumberScoreChangeNotify
 ***********************************/
 //请求消息
