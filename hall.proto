@@ -661,7 +661,7 @@ message circle_number_game_permission_set_resp {
 
 /***********************************
 * 描述: 圈子成员积分设置
-* CmdCode:CmdCircleNumberScoreSet
+* CmdCode:CmdCircleNumberScoreChange
 ***********************************/
 //请求消息
 message circle_number_score_set_req {
