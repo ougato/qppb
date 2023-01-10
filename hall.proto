@@ -368,6 +368,19 @@ message circle_quit_req {
 message circle_quit_resp {
 }
 
+
+/***********************************
+* 描述: 踢玩家出圈
+* CmdCode:CmdCircleKickPlayer
+***********************************/
+//请求消息
+message circle_kick_player_req {
+  int32 player_id = 1; //玩家ID
+}
+//回复消息
+message circle_kick_player_resp {
+}
+
 /***********************************
 * 描述: 圈子信息设置
 * CmdCode:CmdCircleInfoSet
