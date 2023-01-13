@@ -723,7 +723,8 @@ message circle_number_status_resp {
   int32 page_index = 1;  //页索引
   int32 page_count = 2;  //页总数
   int32 search_id = 3; //搜索ID,0:表示不搜索
-  repeated number_info number_list = 4;   //圈子成员列表
+  status_type status = 4; //成员状态
+  repeated number_info number_list = 5;   //圈子成员列表
 
   message number_info{
     player_base_info base_info = 1;          //基础信息
