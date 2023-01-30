@@ -690,27 +690,30 @@ message circle_number_score_change_notify {
 * 描述: 圈子成员状态
 * CmdCode:CmdCircleNumberStatus     管理员、超管、圈主才可以
 ***********************************/
+
+//成员状态查找条件类型
+enum status_filter_type{
+  status_all = 0 ;     //所有
+  status_idle = 1;     //空闲
+  status_offline = 2;  //离线
+  status_loss = 3;     //流失
+  status_score_0 = 4;  //积分为0
+}
+
 //请求消息
 message circle_number_status_req {
   int32 page_index = 1;  //页索引，从第1页开始
   int32 page_size = 2;   //页大小
-  status_type status = 3; //成员状态
+  status_filter_type filter_type = 3; //查找条件
   int32 search_id = 4;   //搜索ID,0:表示不搜索
-
-  enum status_type{
-    status_all = 0 ;     //所有
-    status_idle = 1;     //空闲
-    status_offline = 2;  //离线
-    status_loss = 3;     //流失
-    status_score_0 = 4;  //积分为0
-  }
 }
 //回复消息
 message circle_number_status_resp {
   int32 page_index = 1;  //页索引
   int32 page_count = 2;  //页总数
   int32 search_id = 3; //搜索ID,0:表示不搜索
-  repeated number_info number_list = 4;   //圈子成员列表
+  status_filter_type filter_type = 4; //查找条件
+  repeated number_info number_list = 5;   //圈子成员列表
 
   message number_info{
     player_base_info base_info = 1;          //基础信息
