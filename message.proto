@@ -49,6 +49,7 @@ enum CmdCode{
   CmdCircleEnter = 2102;                //圈子进入
   CmdCircleGoBackHall = 2103;           //圈子退回大厅
   CmdCircleQuit = 2104;                //圈子退出，与JoinApply对应
+  CmdCircleKickPlayer = 2105;          //踢玩家出圈
   CmdCircleInfoSet = 2106;                //圈子信息设置
   CmdCircleInfoGet = 2107;                //圈子信息获取
   CmdCircleInfoStatisticsGet = 2108;                //圈子信息统计信息获取
