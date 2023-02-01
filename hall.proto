@@ -565,8 +565,8 @@ message circle_setting_admin_add_req {
 }
 //回复消息
 message circle_setting_admin_add_resp {
-  int32 player_id = 1;           //玩家ID
-  circle_rule_type rule = 2;     //玩家权限
+  player_base_info player_info = 1;  //玩家信息
+  circle_rule_type rule = 2;         //玩家权限
 }
 
 /***********************************
