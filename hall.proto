@@ -768,6 +768,8 @@ message circle_friend_list_resp {
     int32 friend_percentage = 3;            //自己好友特权百分比
     int32 friend_count = 4;                 //好友数量
     bool score_permission = 5;              //积分操作权限
+    circle_rule_type rule_type = 6;         //圈子身份 如果是管理员就显示管理员，如果是成员显示等级
+    int32 agent_level =7;                   //代理等级 1：一级 ，2：二级.....
   }
 }
 
