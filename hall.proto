@@ -516,10 +516,12 @@ message circle_score_circle_records_resp {
   circle_score_record record_list = 3; //排行列表
 
   message circle_score_record{
-    int32 record_id = 1;             //记录ID
-    string score_num = 2;            //操作分数数量，+，上分数，-下分数
-    player_base_info op_player = 3;  //操作玩家
-    int64 time_stamp = 4;            //时间戳 1970-01-01 00:00:00 的毫秒数
+    int32 record_id = 1;              //记录ID
+    string score_num = 2;             //操作分数数量，+，上分数，-下分数
+    player_base_info op_player = 3;   //操作玩家
+    player_base_info item_player = 4; //目标玩家
+    string item_score_balance = 5;    //目标积分余额
+    int64 time_stamp = 6;             //时间戳 1970-01-01 00:00:00 的毫秒数
   }
 }
 
