@@ -827,7 +827,7 @@ message circle_friend_un_bind_req {
 }
 //回复消息
 message circle_friend_un_bind_resp {
-
+  int32 player_id = 1;      //玩家ID（客户端用来删除玩家列表和数据）
 }
 
 /***********************************
