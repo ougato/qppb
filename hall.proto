@@ -848,7 +848,8 @@ message circle_friend_friend_list_resp {
   int32 page_index = 1;  //页索引
   int32 page_count = 2;  //页总数
   int32 search_id = 3;   //搜索ID,0:表示不搜索
-  repeated friend_info number_list = 4;   //圈子成员列表
+  int32 item_player_id = 4;   //目标玩家ID
+  repeated friend_info number_list = 5;   //圈子成员列表
 
   message friend_info{
     player_base_info base_info = 1;       //基础信息
