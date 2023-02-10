@@ -1052,20 +1052,25 @@ message game_config_zha_jin_hua{
   }
 }
 
+//桌子规则
+message desk_rule{
+  int32 allow_enter_min_score = 1;   // 允许进入最低分
+  bool  aa_sign = 2;                 //AA标志  true:大家AA，false:大赢家出
+  int32 enter_fee = 3 ;              //如果AA 每个玩家报名费， 如果大赢家出，大赢家的报名费
+  int32 win_max_player_score = 4;  //大赢家额外收取报名费分数
+  int32 extra_free = 5;            //抽取大玩家额外的报名费
+  int32 stop_min_score = 6;        //低于该分数，游戏暂停
+}
+
 //游戏房间信息
 message game_desk_setting_info{
   int32 setting_id = 1;   //设置ID
   string setting_name = 2; // 设置名称
   int32 desk_type = 3;  //桌子类型，0 普通场。1 进级场
-  int32 allow_enter_min_score = 4;   // 允许进入最低分
-  bool  aa_sign = 5;    //AA标志  true:大家AA，false:大赢家出
-  int32 enter_fee = 6 ; //如果AA 每个玩家报名费， 如果大赢家出，大赢家的报名费
-  int32 win_max_player_score = 7;  //大赢家额外收取报名费分数
-  int32 extra_free = 8;            //抽取大玩家额外的报名费
-  int32 stop_min_score = 9;        //低于该分数，游戏暂停
-  bool auto_open_desk_sign = 10;   //自动开桌标志
-  game_type game_type = 11; //游戏类型
-  bytes game_config = 12;   //游戏类型对应配置
+  game_type game_type = 4; //游戏类型
+  bool auto_open_desk_sign = 5;   //自动开桌标志
+  bytes game_config = 6;   //游戏配置，不通的游戏类型对应相应的配置配置
+  desk_rule desk_rule = 7 ;   //桌子规则
 
 }
 
@@ -1092,7 +1097,7 @@ message circle_game_desktop_setting_add_req {
 }
 //回复消息
 message circle_game_desktop_setting_add_resp {
-
+  game_desk_setting_info setting = 1; //设置信息
 }
 /***********************************
 * 描述: 圈子游戏开桌设置列表
@@ -1104,6 +1109,7 @@ message circle_game_desktop_setting_modify_req {
 }
 //回复消息
 message circle_game_desktop_setting_modify_resp {
+  game_desk_setting_info setting = 1; //设置信息
 }
 /***********************************
 * 描述: 圈子开桌设置删除
@@ -1127,8 +1133,10 @@ message circle_game_desktop_setting_auto_open_req {
 }
 //回复消息
 message circle_game_desktop_setting_auto_open_resp {
-  repeated game_desk_setting_info list = 1; //桌子列表
+  int32 setting_id = 1;   //设置ID
+  bool auto_open_sign = 2; //自动开桌标识
 }
+
 
 
 message game_desk_player_info{
