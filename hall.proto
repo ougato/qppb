@@ -1079,11 +1079,11 @@ message game_desk_setting_info{
 * CmdCode:CmdCircleGameDeskSettingList
 ***********************************/
 //请求消息
-message circle_game_desktop_setting_list_req {
+message circle_game_desk_setting_list_req {
 
 }
 //回复消息
-message circle_game_desktop_setting_list_resp {
+message circle_game_desk_setting_list_resp {
   repeated game_desk_setting_info list = 1; //桌子列表
 }
 
@@ -1092,11 +1092,11 @@ message circle_game_desktop_setting_list_resp {
 * CmdCode:CmdCircleGameDeskSettingAdd
 ***********************************/
 //请求消息
-message circle_game_desktop_setting_add_req {
+message circle_game_desk_setting_add_req {
   game_desk_setting_info setting = 1; //设置信息
 }
 //回复消息
-message circle_game_desktop_setting_add_resp {
+message circle_game_desk_setting_add_resp {
   game_desk_setting_info setting = 1; //设置信息
 }
 /***********************************
@@ -1104,11 +1104,11 @@ message circle_game_desktop_setting_add_resp {
 * CmdCode:CmdCircleGameDeskSettingModify
 ***********************************/
 //请求消息
-message circle_game_desktop_setting_modify_req {
+message circle_game_desk_setting_modify_req {
   game_desk_setting_info setting = 1; //设置信息
 }
 //回复消息
-message circle_game_desktop_setting_modify_resp {
+message circle_game_desk_setting_modify_resp {
   game_desk_setting_info setting = 1; //设置信息
 }
 /***********************************
@@ -1116,23 +1116,24 @@ message circle_game_desktop_setting_modify_resp {
 * CmdCode:CmdCircleGameDeskSettingDelete
 ***********************************/
 //请求消息
-message circle_game_desktop_setting_delete_req {
+message circle_game_desk_setting_delete_req {
   int32 setting_id = 1;   //设置ID
 }
 //回复消息
-message circle_game_desktop_setting_delete_resp {
+message circle_game_desk_setting_delete_resp {
+  int32 setting_id = 1;   //设置ID
 }
 /***********************************
 * 描述: 修改开桌设置是否自动开桌
 * CmdCode:CmdCircleGameDeskSettingAutoOpenDesk
 ***********************************/
 //请求消息
-message circle_game_desktop_setting_auto_open_req {
+message circle_game_desk_setting_auto_open_req {
   int32 setting_id = 1;   //设置ID
   int32 auto_open_sign = 2; //自动开桌标识  1：自动开 ，2 ：非自动开
 }
 //回复消息
-message circle_game_desktop_setting_auto_open_resp {
+message circle_game_desk_setting_auto_open_resp {
   int32 setting_id = 1;   //设置ID
   int32 auto_open_sign = 2; //自动开桌标识 1：自动开 ，2 ：非自动开
 }
