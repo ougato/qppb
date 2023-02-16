@@ -16,7 +16,29 @@ enum ErrorCode{
   AccountNotRegister = 1000 ;      //该账号未注册
   AccountOrPasswordError = 1001;   //账号或密码错误
   SmsVerificationCodeError = 1002; //短信验证码错误
-  PhoneNumHasBind = 1003; //手机号已经被绑定
+  PhoneNumHasBind = 1003;          //手机号已经被绑定
+  PlayerNotExist = 1004;           //找不到玩家信息
+  PlayerTokenInvalid = 1005;       //token无效
+  PlayerTokenExpire = 1006;        //token已过期
+  PlayerOriginPassword = 1007;     //用户原始密码错误
+  PasswordLengthNotEnough = 1008;  //用户密码长度不够
+
+
+  CircleIdOrInviteCodeNotExist = 2000; //圈子ID或者邀请码不存在
+  PlayerNotJoinCircle = 2001;        //玩家没有加入圈子
+  PlayerApplyHasHandle = 2003;       //玩家申请已处理
+  PlayerHasJoinCircle = 2004;       //玩家已加入圈子
+
+  PlayerAlreadyAdmin = 2005;      //用户已经是管理员
+  PlayerNotHasPermission = 2006;  //用户没有权限
+
+  PlayerScoreNotEnough = 2007;       //玩家积分不足
+
+  CircleDeskSettingNotFind = 2100; //没找到桌子设置
+  CircleDeskRoomNotFind = 2101;    //没找到桌子房间
+  CircleDeskRoomIsFull = 2102;     //桌子房间已满
+  CircleDeskRoomIsStart = 2103;    //桌子已经开始
+
 }
 
 /***********************************

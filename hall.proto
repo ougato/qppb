@@ -1036,19 +1036,18 @@ message game_config_tui_tong_zi{
 
 message game_config_zha_jin_hua{
   game_num_type game_num = 1;   //局数
-  player_num_type player_num = 2; // 游戏人数
-  int32 di_score = 3;   //底分
-  int32 compare_card_round_num = 4;    //比牌轮数
-  int32 stuffy_card_round_num = 5;    //闷牌轮数
-  int32 max_round_num = 6;    //最大开牌轮数
-  int32 discard_card_time = 7;    //弃牌时间
-  int32 add_score_wait_time = 8;  //加分等待时间
-  int32 max_score = 9;  //封顶分数，0：表示不限
-  int32 bao_zi_reward_score = 10;  //豹子奖励分数
-  int32 look_compare_card_multiple = 11; //看牌比牌倍数
-  bool middle_enter_allow_sign = 12;   //允许中途加入标志
-  bool start_game_sign = 13;  //自动开局标志
-  bool crazy_multiple_sign = 14; //疯狂加倍标志
+  int32 di_score = 2;   //底分
+  int32 compare_card_round_num = 3;    //比牌轮数
+  int32 stuffy_card_round_num = 4;    //闷牌轮数
+  int32 max_round_num = 5;    //最大开牌轮数
+  int32 discard_card_time = 6;    //弃牌时间
+  int32 add_score_wait_time = 7;  //加分等待时间
+  int32 max_score = 8;  //封顶分数，0：表示不限
+  int32 bao_zi_reward_score = 9;  //豹子奖励分数
+  int32 look_compare_card_multiple = 10; //看牌比牌倍数
+  bool middle_enter_allow_sign = 11;   //允许中途加入标志
+  bool start_game_sign = 12;  //自动开局标志
+  bool crazy_multiple_sign = 13; //疯狂加倍标志
 
   //游戏局数
   enum game_num_type{
@@ -1065,7 +1064,7 @@ message game_config_zha_jin_hua{
   }
 }
 
-//桌子规则
+//桌子规则,游戏人数固定最大五人
 message desk_rule{
   int32 allow_enter_min_score = 1;   // 允许进入最低分
   bool aa_sign = 2;                 //AA标志  true:大家AA，false:大赢家出
@@ -1154,15 +1153,15 @@ message circle_game_desk_setting_auto_open_resp {
 
 
 message game_desk_player_info{
-  int32 player_id = 1;   //玩家ID
+  int64 player_id = 1;   //玩家ID
   string player_name = 2;    //玩家名称
   string player_avatar = 3;  //玩家头像
-  int32 position = 4;   //玩家座位
+  int64 position = 4;   //玩家座位，从0开始   0：位置是房主
 }
 
 message game_desk_info{
-  int32 desk_id  = 1;  //桌子ID
-  string desk_no = 2;  //桌子编号
+  int64 desk_id  = 1;  //桌子ID
+  int64 desk_no = 2;  //桌子编号
   game_desk_setting_info room_info = 3;  //房间信息
   repeated game_desk_player_info player_list = 4; //玩家列表
 }
@@ -1187,7 +1186,7 @@ message circle_game_desk_list_resp {
 ***********************************/
 //请求消息
 message circle_game_desk_create_req {
-  int32 desk_setting_id = 1; //桌子设置ID
+  int64 desk_setting_id = 1; //桌子设置ID
 }
 //回复消息
 message circle_game_desk_create_resp {
@@ -1200,7 +1199,8 @@ message circle_game_desk_create_resp {
 ***********************************/
 //请求消息
 message circle_game_desk_enter_req {
-  int32 desk_id = 1; //桌子ID
+  int64 desk_id = 1; //桌子ID
+  int64 position = 2; //位置 ID  0：位置是房主
 }
 //回复消息
 message circle_game_desk_enter_resp {
@@ -1222,7 +1222,7 @@ message circle_game_desk_enter_notice {
 ***********************************/
 //请求消息
 message circle_game_desk_leave_req {
-  int32 desk_id = 1; //桌子ID
+  int64 desk_id = 1; //桌子ID
 }
 //回复消息
 message circle_game_desk_leave_resp {
@@ -1235,5 +1235,5 @@ message circle_game_desk_leave_resp {
 ***********************************/
 //请求消息
 message circle_game_desk_leave_notice {
-  int32 player_id = 1; //玩家ID
+  int64 player_id = 1; //玩家ID
 }
