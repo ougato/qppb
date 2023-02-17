@@ -33,8 +33,12 @@ enum ErrorCode{
 
   PlayerAlreadyAdmin = 2005;      //用户已经是管理员
   PlayerNotHasPermission = 2006;  //用户没有权限
+  PlayerFriendPrivilegeExceedMax = 2007;   //好友特权超出最大值
 
-  PlayerScoreNotEnough = 2007;       //玩家积分不足
+  PlayerSelfScoreNotEnough = 2008;       //玩家自身积分不足
+  PlayerScoreNotEnough = 2009;           //玩家积分不足
+  PlayerScoreNotAllowModified = 2010;    //玩家积分不允许被修改
+  ItemPlayerNotAllowBeSelf = 2011;      //目标玩家不允许是自己
 
   CircleDeskSettingNotFind = 2100; //没找到桌子设置
   CircleDeskRoomNotFind = 2101;    //没找到桌子房间
@@ -50,35 +54,38 @@ enum CmdCode{
   CmdUnKnow = 0;     //未知错误
   CmdHeartBeat = 1;  //心跳。默认30s 发送一次
 
-  CmdHallModule = 2000;               //大厅模块指令 2000-2999
-  CmdHallLoginAuth = 2001;            //大厅登录认证
-  CmdHallLogout = 2002;               //大厅登录退出
-  CmdHallBindPhone = 2003;            //绑定手机号
-  CmdHallPasswordSet = 2004;          //设置密码
-  CmdHallPasswordReset = 2005;        //重置密码
-  CmdHallRealNameAuth = 2006;         //实名认证
-  CmdHallPlayerLocation = 2007;       //玩家位置
-  CmdHallPlayerNicknameModify = 2008; //玩家昵称修改
-  CmdHallPlayerAvatarModify = 2009;   //玩家头像修改
-  CmdHallPlayerInfoGet = 2010;        //玩家信息获取
-  CmdHallCustomerServiceInfo = 2011;  //客服信息
-  CmdHallFeedback = 20012;             //反馈
-  CmdHallNotice = 20013;               //公告
-  CmdHallMessage = 20014;              //大厅消息
-  CmdHallBattleRecordList = 2015;         //大厅战绩列表
-  CmdHallBattleRecordDetail = 2016;         //大厅战绩详情
-  CmdHallBattleRecordDetailPlayback = 2017;   //大厅战绩详情回放
+  CmdModuleHall = 1000;               //大厅模块指令 1000-1999
+  CmdHallLoginAuth = 1001;            //大厅登录认证
+  CmdHallLogout = 1002;               //大厅登录退出
+  CmdHallBindPhone = 1003;            //绑定手机号
+  CmdHallPasswordSet = 1004;          //设置密码
+  CmdHallPasswordReset = 1005;        //重置密码
+  CmdHallRealNameAuth = 1006;         //实名认证
+  CmdHallPlayerLocation = 1007;       //玩家位置
+  CmdHallPlayerNicknameModify = 1008; //玩家昵称修改
+  CmdHallPlayerAvatarModify = 1009;   //玩家头像修改
+  CmdHallPlayerInfoGet = 1010;        //玩家信息获取
+  CmdHallBattleRecordList = 1011;         //大厅战绩列表
+  CmdHallBattleRecordDetail = 1012;         //大厅战绩详情
 
-  CmdCircleJoinApply = 2101;                //圈子加入申请
-  CmdCircleEnter = 2102;                //圈子进入
-  CmdCircleGoBackHall = 2103;           //圈子退回大厅
-  CmdCircleQuit = 2104;                //圈子退出，与JoinApply对应
-  CmdCircleKickPlayer = 2105;          //踢玩家出圈
-  CmdCircleInfoSet = 2106;                //圈子信息设置
-  CmdCircleInfoGet = 2107;                //圈子信息获取
-  CmdCircleInfoStatisticsGet = 2108;                //圈子信息统计信息获取
-  CmdCircleInfoStatisticsClear = 2109;              //圈子信息统计信息清除
-  CmdCircleInfoRankGet = 2110;                //圈子信息竞技排行
+  CmdHallCustomerServiceInfo = 1100;  //客服信息
+  CmdHallFeedback = 1101;             //反馈
+  CmdHallNotice = 1102;               //公告
+  CmdHallMessage = 1103;              //大厅消息
+  CmdHallBattleRecordDetailPlayback = 1104;  //大厅战绩详情回放
+
+  CmdModuleCircle = 2000;              //圈子模块指令 2000-2999
+  CmdCircleJoinApply = 2001;           //圈子加入申请
+  CmdCircleEnter = 2002;               //圈子进入
+  CmdCircleGoBackHall = 2003;          //圈子退回大厅
+  CmdCircleQuit = 2004;                //圈子退出，与JoinApply对应
+  CmdCircleKickPlayer = 2005;          //踢玩家出圈
+
+  CmdCircleInfoSet = 2101;                //圈子信息设置
+  CmdCircleInfoGet = 2102;                //圈子信息获取
+  CmdCircleInfoStatisticsGet = 2103;      //圈子信息统计信息获取
+  CmdCircleInfoStatisticsClear = 2104;    //圈子信息统计信息清除
+  CmdCircleInfoRankGet = 2105;            //圈子信息竞技排行
 
   CmdCircleScoreCircleRecords = 2201;       //圈子胜点-乐圈清单记录
   CmdCircleScoreGameRecords = 2202;         //圈子胜点-游戏清单记录
@@ -122,14 +129,15 @@ enum CmdCode{
   CmdCircleGameDeskEnter = 2509;           //圈子桌子进入
   CmdCircleGameDeskEnterNotice = 2510;      //圈子桌子玩家进入消息通知
   CmdCircleGameDeskLeave = 2511;           //圈子桌子离开
-  CmdCircleGameDeskLeaveNotice = 2523;     //圈子桌子玩家离开消息通知
+  CmdCircleGameDeskLeaveNotice = 2512;     //圈子桌子玩家离开消息通知
+  CmdCircleGameDeskStart = 2513;           //圈子桌子玩家开始游戏
+  CmdCircleGameDeskStartNotice = 2514;     //圈子桌子玩家开始游戏通知
 
 
+  CmdModuleGame = 3000; //游戏模块指令 3000-4999
+  CmdModuleZJH = 3100;  //炸金花模块指令
 
-
-  CmdZJHModule = 3000;  //炸金花模块指令 3000-3999
-
-  CmdTTZModule = 4000;  //推筒子模块指令 4000-4999
+  CmdModuleTTZ = 3200;  //推筒子模块指令
 
 
 }
