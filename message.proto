@@ -40,10 +40,12 @@ enum ErrorCode{
   PlayerScoreNotAllowModified = 2010;    //玩家积分不允许被修改
   ItemPlayerNotAllowBeSelf = 2011;      //目标玩家不允许是自己
 
-  CircleDeskSettingNotFind = 2100; //没找到桌子设置
-  CircleDeskRoomNotFind = 2101;    //没找到桌子房间
-  CircleDeskRoomIsFull = 2102;     //桌子房间已满
-  CircleDeskRoomIsStart = 2103;    //桌子已经开始
+  CircleDeskSettingNotFind = 2100;         //没找到桌子设置
+  CircleDeskRoomNotFind = 2101;            //没找到桌子房间
+  CircleDeskRoomIsFull = 2102;             //桌子房间已满
+  CircleDeskRoomStartNotLeave = 2103;      //桌子已经开始,不能离开
+  CircleDeskRoomSomeoneNotReady = 2104;    //桌子有人未准备就绪
+  CircleDeskRoomNotHost = 2105;            //不是桌子房主
 
 }
 
@@ -130,8 +132,11 @@ enum CmdCode{
   CmdCircleGameDeskEnterNotice = 2510;      //圈子桌子玩家进入消息通知
   CmdCircleGameDeskLeave = 2511;           //圈子桌子离开
   CmdCircleGameDeskLeaveNotice = 2512;     //圈子桌子玩家离开消息通知
-  CmdCircleGameDeskStart = 2513;           //圈子桌子玩家开始游戏
-  CmdCircleGameDeskStartNotice = 2514;     //圈子桌子玩家开始游戏通知
+  CmdCircleGameDeskReady = 2513;           //圈子桌子玩家准备就绪
+  CmdCircleGameDeskReadyNotice = 2514;     //圈子桌子玩家就绪通知
+  CmdCircleGameDeskStart = 2515;           //圈子桌子玩家开始游戏
+  CmdCircleGameDeskStartNotice = 2516;     //圈子桌子玩家开始游戏通知
+
 
 
   CmdModuleGame = 3000; //游戏模块指令 3000-4999

@@ -1207,6 +1207,8 @@ message circle_game_desk_enter_resp {
   game_desk_info desk_info = 1; //桌子列表
 }
 
+
+
 /***********************************
 * 描述: 圈子桌子玩家进入通知
 * CmdCode:CmdCircleGameDeskEnterNotice
@@ -1222,11 +1224,9 @@ message circle_game_desk_enter_notice {
 ***********************************/
 //请求消息
 message circle_game_desk_leave_req {
-  int64 desk_id = 1; //桌子ID
 }
 //回复消息
 message circle_game_desk_leave_resp {
-
 }
 
 /***********************************
@@ -1236,4 +1236,48 @@ message circle_game_desk_leave_resp {
 //请求消息
 message circle_game_desk_leave_notice {
   int64 player_id = 1; //玩家ID
+}
+
+/***********************************
+* 描述: 圈子桌子准备就绪
+* CmdCode:CmdCircleGameDeskReady
+***********************************/
+//请求消息
+message circle_game_desk_ready_req {
+  bool ready_status = 1;    // true 准备就绪，false 取消准备
+}
+//回复消息
+message circle_game_desk_ready_resp {
+  bool ready_status = 1;
+}
+
+/***********************************
+* 描述: 圈子桌子准备就绪
+* CmdCode:CmdCircleGameDeskReadyNotice
+***********************************/
+//请求消息
+message circle_game_desk_ready_notice {
+  int64 player_id = 1; //玩家ID
+  bool ready_status = 2;
+}
+
+
+/***********************************
+* 描述: 圈子桌子游戏开始
+* CmdCode:CmdCircleGameDeskStart
+***********************************/
+//请求消息
+message circle_game_desk_start_req {
+}
+//回复消息
+message circle_game_desk_start_resp {
+}
+
+/***********************************
+* 描述: 圈子桌子玩家离开通知
+* CmdCode:CmdCircleGameDeskStartNotice
+***********************************/
+//请求消息
+message circle_game_desk_start_notice {
+   int64 countdown_second = 1;  //倒计时秒
 }
